@@ -1,0 +1,13 @@
+# Created by https://www.gitignore.io/api/docfx
+# Edit at https://www.gitignore.io/?templates=docfx
+
+### DocFx ###
+.cache
+/**/_site/
+
+# End of https://www.gitignore.io/api/docfx
+
+### Custom ###
+
+Assembly-*.dll
+Unity*.dll
