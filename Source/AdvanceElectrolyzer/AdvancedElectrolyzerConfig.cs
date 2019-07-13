@@ -1,24 +1,35 @@
-﻿using TUNING;
+﻿using Newtonsoft.Json;
+using TUNING;
 using UnityEngine;
 
 namespace AdvanceElectrolyzer
 {
     public class AdvancedElectrolyzerConfig : IBuildingConfig
     {
-        public const string ID = "AdvacnedElectrolyzer";
-
-        // This is litre per second
-        public const float WATERCONSUMPTIONRATE = 1f;
-        // This is gram per second
-        public const float WATER2OXYGEN_RATIO = 1f;
-        public const float WATER2HYDROGEN_RATIO = 2f;
-
-        //Defines the effieceny of the conversion
-        public const float EFFIECENY = 50f;
-
-        public const float OXYGEN_TEMPERATURE = 343.15f;
+        public const string ID = "AdvacnedElectrolyzer"; //Woops, typo. Can't fix this because save game compatibility.
 
         private ConduitPortInfo secondaryPort = new ConduitPortInfo(ConduitType.Gas, new CellOffset(0, 1));
+
+        public static Config config = new Config();
+
+        public class Config
+        {
+            // This is litre per second
+            [JsonProperty("Water Consumption Rate")]
+            public float waterConsumptionRate = 1f;
+            // This is gram per second
+            [JsonProperty("Oxygen Output Amount")]
+            public float water2OxygenRatio = 0.888f;
+            // This is gram per second
+            [JsonProperty("Hydrogen Output Amount")]
+            public float water2HydrogenRatio = 0.111999989f;
+            [JsonProperty("Exhaust Heat Amount")]
+            public float heatExhaust = 0f;
+            [JsonProperty("Self Heat Amount")]
+            public float heatSelf = 4f;
+            [JsonProperty("Energy Consumption")]
+            public float energyConsumption = 400f;
+        }
 
         public override BuildingDef CreateBuildingDef()
         {
@@ -37,9 +48,9 @@ namespace AdvanceElectrolyzer
             BuildingDef def = BuildingTemplates.CreateBuildingDef(id, width, height, anim, hitpoints, construction_time, tier, all_metals, melting_point, build_location_rule, BUILDINGS.DECOR.PENALTY.TIER1, tier2, 0.2f);
             def.RequiresPowerInput = true;
             def.PowerInputOffset = new CellOffset(1, 0);
-            def.EnergyConsumptionWhenActive = 400f;
-            def.ExhaustKilowattsWhenActive = 0f;
-            def.SelfHeatKilowattsWhenActive = 4f;
+            def.EnergyConsumptionWhenActive = config.energyConsumption;
+            def.ExhaustKilowattsWhenActive = config.heatExhaust;
+            def.SelfHeatKilowattsWhenActive = config.heatSelf;
             def.ViewMode = OverlayModes.GasConduits.ID;
             def.MaterialCategory = MATERIALS.REFINED_METALS;
             def.AudioCategory = "HollowMetal";
@@ -69,7 +80,6 @@ namespace AdvanceElectrolyzer
 
             ConduitConsumer conduitConsumer = go.AddOrGet<ConduitConsumer>();
             conduitConsumer.conduitType = ConduitType.Liquid;
-            conduitConsumer.consumptionRate = WATERCONSUMPTIONRATE;
             conduitConsumer.capacityTag = GameTags.AnyWater;
             conduitConsumer.capacityKG = storage.capacityKg;
             conduitConsumer.forceAlwaysSatisfied = true;

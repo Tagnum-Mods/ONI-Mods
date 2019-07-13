@@ -11,3 +11,5 @@
 
 Assembly-*.dll
 Unity*.dll
+*.mdb
+*.pdb

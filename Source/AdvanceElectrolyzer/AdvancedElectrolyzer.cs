@@ -12,6 +12,18 @@ namespace AdvanceElectrolyzer
         [MyCmpGet]
         private Operational operational;
 
+        [SerializeField]
+        public ConduitPortInfo portInfo;
+
+        [MyCmpReq]
+        private Building building;
+
+        [MyCmpReq]
+        private KSelectable selectable;
+
+        [MyCmpReq]
+        public Storage storage;
+
         //public Tag waterTag = GameTags.Water;
         //public Tag oxygenTag = GameTags.Oxygen;
         public Tag hydrogenTag = GameTags.Hydrogen;
@@ -85,18 +97,6 @@ namespace AdvanceElectrolyzer
             base.OnCleanUp();
         }
 
-        [SerializeField]
-        public ConduitPortInfo portInfo;
-
-        [MyCmpReq]
-        private Building building;
-
-        [MyCmpReq]
-        private KSelectable selectable;
-
-        [MyCmpReq]
-        public Storage storage;
-
         //private int liquidInputCell = -1;
 
         private int oxygenOutputCell = -1;
@@ -124,8 +124,8 @@ namespace AdvanceElectrolyzer
                     //Debug.Log(String.Format("Current Pipe Contents: Water({0}), Oxygen({1}) Hydrogen({2})", water.Mass, oxygen.mass, hydrogen.mass));
                     value = true;
                     SimHashes oxygenHash = (water.ElementID == SimHashes.Water) ? SimHashes.Oxygen : SimHashes.ContaminatedOxygen;
-                    float num2 = gasFlowManager.AddElement(this.oxygenOutputCell, oxygenHash, GetRatioedEffecieny(OxygenRatio), 300f, water.DiseaseIdx, 0);
-                    float num3 = gasFlowManager.AddElement(this.hydrogenOutputCell, SimHashes.Hydrogen, GetRatioedEffecieny(HydrogenRatio), 300f, water.DiseaseIdx, 0);
+                    float num2 = gasFlowManager.AddElement(this.oxygenOutputCell, oxygenHash, OxygenRatio, 300f, water.DiseaseIdx, 0);
+                    float num3 = gasFlowManager.AddElement(this.hydrogenOutputCell, SimHashes.Hydrogen, HydrogenRatio, 300f, water.DiseaseIdx, 0);
                     //Debug.Log(String.Format("Output Nums: ({0}, {1})", num2, num3));
                     if (num2 > 0f && num3 > 0f) {
                         water.Mass -= LiquidRatio;
@@ -208,12 +208,6 @@ namespace AdvanceElectrolyzer
             //}
         }
 
-        private float GetRatioedEffecieny(float ratio) {
-            // First Ratio gets divided by 100 for to be times by the Effieceny percentage
-            // Then gets divided by 100 again to match up to water consumption
-            return ((ratio / 100f) * AdvancedElectrolyzerConfig.EFFIECENY) / LiquidRatio;
-        }
-
         public CellOffset GetSecondaryConduitOffset()
         {
             return this.portInfo.offset;
@@ -226,19 +220,19 @@ namespace AdvanceElectrolyzer
 
         public float LiquidRatio {
             get {
-                return AdvancedElectrolyzerConfig.WATERCONSUMPTIONRATE;
+                return AdvancedElectrolyzerConfig.config.waterConsumptionRate;
             }
         }
 
         public float OxygenRatio {
             get {
-                return AdvancedElectrolyzerConfig.WATER2OXYGEN_RATIO;
+                return AdvancedElectrolyzerConfig.config.water2OxygenRatio;
             }
         }
 
         public float HydrogenRatio {
             get {
-                return AdvancedElectrolyzerConfig.WATER2HYDROGEN_RATIO;
+                return AdvancedElectrolyzerConfig.config.water2HydrogenRatio;
             }
         }
     }
