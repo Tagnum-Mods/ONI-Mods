@@ -33,19 +33,21 @@ namespace AdvanceElectrolyzer
 
         public override BuildingDef CreateBuildingDef()
         {
-            string id = ID;
-            int width = 2;
-            int height = 2;
-            string anim = "electrolyzer_kanim";
-            int hitpoints = 100;
-            float construction_time = 30f;
-            float[] tier = BUILDINGS.CONSTRUCTION_MASS_KG.TIER3;
-            string[] all_metals = MATERIALS.ALL_METALS;
-            float melting_point = 800f;
-            BuildLocationRule build_location_rule = BuildLocationRule.OnFloor;
-            EffectorValues tier2 = NOISE_POLLUTION.NOISY.TIER3;
-
-            BuildingDef def = BuildingTemplates.CreateBuildingDef(id, width, height, anim, hitpoints, construction_time, tier, all_metals, melting_point, build_location_rule, BUILDINGS.DECOR.PENALTY.TIER1, tier2, 0.2f);
+            BuildingDef def = BuildingTemplates.CreateBuildingDef(
+                id: ID,
+                width: 2,
+                height: 2,
+                anim: "electrolyzer_kanim",
+                hitpoints: BUILDINGS.HITPOINTS.TIER3,
+                construction_time: BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER3,
+                construction_mass: BUILDINGS.CONSTRUCTION_MASS_KG.TIER3,
+                construction_materials: MATERIALS.REFINED_METALS,
+                melting_point: BUILDINGS.MELTING_POINT_KELVIN.TIER3,
+                build_location_rule: BuildLocationRule.OnFloor,
+                decor: BUILDINGS.DECOR.PENALTY.TIER1,
+                noise: NOISE_POLLUTION.NOISY.TIER3,
+                0.2f
+            );
             def.RequiresPowerInput = true;
             def.PowerInputOffset = new CellOffset(1, 0);
             def.EnergyConsumptionWhenActive = config.energyConsumption;

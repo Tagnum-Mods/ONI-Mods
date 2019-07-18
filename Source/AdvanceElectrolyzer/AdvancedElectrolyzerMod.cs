@@ -53,7 +53,7 @@ namespace AdvanceElectrolyzer
     {
         public static void Prefix()
         {
-            Debug.Log(" === GeneratedBuildings Prefix === " + AdvancedElectrolyzerConfig.ID);
+            //Debug.Log(" === GeneratedBuildings Prefix === " + AdvancedElectrolyzerConfig.ID);
 
             string prefix = "STRINGS.BUILDINGS.PREFABS." + AdvancedElectrolyzerConfig.ID.ToUpper();
             Strings.Add(prefix + ".NAME", "Advanced Electrolyzer");
@@ -80,7 +80,7 @@ namespace AdvanceElectrolyzer
     {
         public static void Prefix(Db __instance)
         {
-            Debug.Log(" === Database.Techs loaded === " + AdvancedElectrolyzerConfig.ID);
+            //Debug.Log(" === Database.Techs loaded === " + AdvancedElectrolyzerConfig.ID);
             List<string> list = new List<string>(Techs.TECH_GROUPING["ImprovedOxygen"]) { AdvancedElectrolyzerConfig.ID };
             Techs.TECH_GROUPING["ImprovedOxygen"] = list.ToArray();
         }
