@@ -6,9 +6,10 @@ namespace AdvanceElectrolyzer
 {
     public class AdvancedElectrolyzerConfig : IBuildingConfig
     {
-        public const string ID = "AdvacnedElectrolyzer"; //Woops, typo. Can't fix this because save game compatibility.
+        //Woops, typo. Can't fix this because save game compatibility.
+        public const string ID = "AdvacnedElectrolyzer"; 
 
-        private ConduitPortInfo secondaryPort = new ConduitPortInfo(ConduitType.Gas, new CellOffset(0, 1));
+        private readonly ConduitPortInfo secondaryPort = new ConduitPortInfo(ConduitType.Gas, new CellOffset(0, 1));
 
         public static Config config = new Config();
 
@@ -37,7 +38,7 @@ namespace AdvanceElectrolyzer
                 id: ID,
                 width: 2,
                 height: 2,
-                anim: "electrolyzer_kanim",
+                anim: "electrolyzer_kanim", //advanced_electrolyzer_kanim
                 hitpoints: BUILDINGS.HITPOINTS.TIER3,
                 construction_time: BUILDINGS.CONSTRUCTION_TIME_SECONDS.TIER3,
                 construction_mass: BUILDINGS.CONSTRUCTION_MASS_KG.TIER3,

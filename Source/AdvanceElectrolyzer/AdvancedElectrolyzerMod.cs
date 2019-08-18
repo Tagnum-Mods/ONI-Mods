@@ -7,11 +7,11 @@ using System;
 
 namespace AdvanceElectrolyzer
 {
-    [HarmonyPatch(typeof(SplashMessageScreen), "OnSpawn")]
-    internal class GameLaunch {
+    public static class Mod_OnLoad
+    {
         private static JsonSerializer serializer = JsonSerializer.CreateDefault(new JsonSerializerSettings { Formatting = Formatting.Indented });
 
-        public static void Postfix() {
+        public static void OnLoad() {
             try
             {
                 System.Reflection.Assembly assem = System.Reflection.Assembly.GetExecutingAssembly();
@@ -19,23 +19,24 @@ namespace AdvanceElectrolyzer
                 string cbdir = assem.CodeBase.Replace("file:///", "").Replace('/', '\\');
 
                 if (dir != cbdir) { dir = cbdir; }
-                /*
-                Debug.Log(" === Current Dir === " + dir);
-                Debug.Log(" === Current Code Base === " + assem.CodeBase);
-                Debug.Log(" === Current Code Base Dir === " + cbdir);
-                Debug.Log(" === Dir ==  Code Base Dir === " + (cbdir == dir));
-                Debug.Log(" Test " + Path.GetDirectoryName(dir));
-                */
+
                 string config_path = Path.Combine(Path.GetDirectoryName(dir), "Config.json");
-                //Debug.Log(config_path);
-                using (StreamReader streamReader = new StreamReader(config_path))
-                {
-                    using (JsonTextReader jsonReader = new JsonTextReader(streamReader))
+                Debug.Log("File Path: " + config_path);
+                if (File.Exists(config_path)) {
+                    using (StreamReader streamReader = new StreamReader(config_path))
                     {
-                        AdvancedElectrolyzerConfig.config = serializer.Deserialize<AdvancedElectrolyzerConfig.Config>(jsonReader);
-                        jsonReader.Close();
+                        using (JsonTextReader jsonReader = new JsonTextReader(streamReader))
+                        {
+                            AdvancedElectrolyzerConfig.config = serializer.Deserialize<AdvancedElectrolyzerConfig.Config>(jsonReader);
+                            jsonReader.Close();
+                        }
+                        streamReader.Close();
                     }
-                    streamReader.Close();
+                } else {
+                    using (StreamWriter writer = File.CreateText(config_path)) {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(writer, AdvancedElectrolyzerConfig.config);
+                    }
                 }
             }
             catch (NotSupportedException)
