@@ -129,6 +129,7 @@ namespace AdvanceElectrolyzer
                     //Debug.Log(String.Format("Output Nums: ({0}, {1})", num2, num3));
                     if (num2 > 0f && num3 > 0f) {
                         water.Mass -= LiquidRatio;
+                        ReportManager.Instance.ReportValue(ReportManager.ReportType.OxygenCreated, OxygenRatio, base.gameObject.GetProperName());
                     } else if (num2 > 0f || num3 > 0f) {
                         value = false;
                         gasFlowManager.RemoveElement(this.hydrogenOutputCell, 100f);
