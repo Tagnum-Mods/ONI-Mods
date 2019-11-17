@@ -124,9 +124,9 @@ namespace AdvanceElectrolyzer
                     //Debug.Log(String.Format("Current Pipe Contents: Water({0}), Oxygen({1}) Hydrogen({2})", water.Mass, oxygen.mass, hydrogen.mass));
                     value = true;
                     SimHashes oxygenHash = (water.ElementID == SimHashes.Water) ? SimHashes.Oxygen : SimHashes.ContaminatedOxygen;
-                    //Debug.Log(String.Format("Output Nums: ({0}, {1})", num2, num3));
                     float oxygenGenerated = gasFlowManager.AddElement(this.oxygenOutputCell, oxygenHash, OxygenRatio, 300f, water.DiseaseIdx, 0);
                     float hydrogenGenerated = gasFlowManager.AddElement(this.hydrogenOutputCell, SimHashes.Hydrogen, HydrogenRatio, 300f, water.DiseaseIdx, 0);
+                    //Debug.Log(String.Format("Output Nums: ({0}, {1})", oxygenGenerated, hydrogenGenerated));
                     if (oxygenGenerated > 0f && hydrogenGenerated > 0f) {
                         water.Mass -= LiquidRatio;
                         ReportManager.Instance.ReportValue(ReportManager.ReportType.OxygenCreated, OxygenRatio, base.gameObject.GetProperName());
