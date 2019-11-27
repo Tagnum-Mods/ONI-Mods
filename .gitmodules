@@ -1,0 +1,3 @@
+[submodule "Source/AdvancedElectrolyzer"]
+	path = Source/AdvancedElectrolyzer
+	url = https://github.com/Tagnum-Mods/ONI-Advanced-Electrolyzer.git

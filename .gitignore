@@ -9,7 +9,7 @@
 
 ### Custom ###
 
-Assembly-*.dll
-Unity*.dll
 *.mdb
 *.pdb
+/lib/*.dll
+*.7z
