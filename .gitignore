@@ -13,3 +13,4 @@
 *.pdb
 /lib/*.dll
 *.7z
+*.log
