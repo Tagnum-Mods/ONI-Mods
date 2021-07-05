@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Target Name="ILRepacker" AfterTargets="Build" BeforeTargets="PostBuildEvent">
+
+		<ItemGroup>
+			<InputAssemblies Include="$(OutputPath)\$(AssemblyName).dll" />
+			<InputAssemblies Include="$(OutputPath)\PLib.dll" />
+		</ItemGroup>
+
+		<ItemGroup>
+			<LibraryPath Include="$(SolutionDir)\..\lib\"></LibraryPath>
+			<LibraryPath Include="$(SolutionDir)\..\lib\vanilla"></LibraryPath>
+			<LibraryPath Include="$(SolutionDir)\..\lib\spaced_out"></LibraryPath>
+		</ItemGroup>
+
+		<ILRepack
+			Parallel="true"
+			Internalize="true"
+			LibraryPath="@(LibraryPath)"
+			InputAssemblies="@(InputAssemblies)"
+			TargetKind="Dll"
+			TargetPlatformVersion="v4"
+			TargetPlatformDirectory="C:\Windows\Microsoft.NET\Framework64\v4.0.30319"
+			OutputFile="$(OutputPath)\$(AssemblyName).dll"
+    />
+
+	</Target>
+</Project>

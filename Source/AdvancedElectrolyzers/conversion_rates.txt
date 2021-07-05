@@ -1,0 +1,44 @@
+NaCL + H2O = 76.455
+
+Na = 22.99
+Cl = 35.45
+H = 1.001
+O = 15.999
+
+Salt Water -> Water/Salt Ratio = 1 -> 0.93:0.07
+Brine -> Water/Salt Ratio = 1 -> 0.7:0.3
+
+Salt Water = 7% Salt 93% Water
+Brine = 30% Salt 70% Water
+
+Salt_Water = 76.455
+-------------------
+Sodium = 22.99 / 76.455 = 0.30069975802 = 30.07%
+Chlorine = 35.45 / 76.455 = 0.46367144071 = 46.37%
+Hydrogen = 2.002 / 76.455 = 0.02618533778 = 2.62%
+Oxygen = 15.999 / 76.455 = 0.20926034922 = 20.93%
+
+NaCL = 76.44%
+H2O = 23.54%
+
+Salt Water (ONI)
+----------------
+NaCl = 7%
+H2O = 93%
+
+5kl
+vvv
+NaCL = 5.989 (5.99) Mols
+H2O = 258.1 Mols
+
+Brine (ONI)
+-----------
+NaCL = 30%
+H2O = 70%
+
+5kl
+vvv
+H2O = 59.89 mols * 
+NaCl = 25.666 mols
+
+

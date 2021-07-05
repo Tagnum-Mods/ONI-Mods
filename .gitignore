@@ -14,3 +14,4 @@
 /lib/*.dll
 *.7z
 *.log
+Source/ONI Source/*
