@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-#if SPACED_OUT
 using PeterHan.PLib.Options;
-#endif
 using TUNING;
 using UnityEngine;
 
@@ -10,7 +8,6 @@ namespace TagnumElite.AdvancedElectrolyzers
     public class IndustrialElectrolyzerConfig : IBuildingConfig
     {
         //Woops, typo. Can't fix this because save game compatibility.
-        //I will be changing this when the mergedown happens.
         public const string ID = "AdvacnedElectrolyzer";
 
         private readonly ConduitPortInfo secondaryPort = new ConduitPortInfo(ConduitType.Gas, new CellOffset(0, 1));
@@ -20,123 +17,89 @@ namespace TagnumElite.AdvancedElectrolyzers
         [JsonObject(MemberSerialization.OptIn)]
         public class IEConfig
         {
-#if SPACED_OUT
             [Option("Water Consumption Rate", "This is litre per second")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty]
             public float waterConsumptionRate { get; set; }
 
             // # Clean/Polluted Water #
-#if SPACED_OUT
             [Option("Oxygen Production Rate", "This is gram per second")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty]
             public float water2OxygenRatio { get; set; }
 
-#if SPACED_OUT
             [Option("Hydrogen Production Rate", "This is gram per second")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty]
             public float water2HydrogenRatio { get; set; }
 
             // # Salt Water #
-#if SPACED_OUT
             [Option("Salt Water 2 Water Ratio")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty]
             public float saltWater2WaterRatio { get; set; }
 
-#if SPACED_OUT
             [Option("Salt Water 2 Salt Ratio")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty]
             public float saltWater2SaltRatio { get; set; }
 
             // # Brine #
-#if SPACED_OUT
             [Option("Brine 2 Water Ratio")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty]
             public float brine2WaterRatio { get; set; }
 
-#if SPACED_OUT
             [Option("Brine 2 Salt Ratio")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty]
             public float brine2SaltRatio { get; set; }
 
-#if SPACED_OUT
             [Option("Salt 2 Bleach Stone Ratio")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty]
             public float salt2BleachStoneRatio { get; set; }
 
-#if SPACED_OUT
             [Option("Oxygen Output Temperature")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty("Minimium Oxygen Temperature")]
             public float oxygenTemperature { get; set; }
 
-#if SPACED_OUT
             [Option("Hydrogen Output Temperature")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty("Minimium Hydrogen Temperature")]
             public float hydrogenTemperature { get; set; }
 
-#if SPACED_OUT
             [Option("Heat Exhaust Amount")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty("Exhaust Heat Amount")]
             public float heatExhaust { get; set; }
 
-#if SPACED_OUT
             [Option("Heat Internal Amount")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty("Self Heat Amount")]
             public float heatSelf { get; set; }
 
-#if SPACED_OUT
             [Option("Energy Consumption")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty("Energy Consumption")]
             public float energyConsumption { get; set; }
 
-#if SPACED_OUT
             [Option("Work Speed Multiplier")]
             [Limit(0, 10)]
-#endif
             [JsonProperty("Work Speed Multiplier")]
             public float workSpeedMultiplier { get; set; }
 
-#if SPACED_OUT
             [Option("Process Brine/Saltwater")]
-#endif
             [JsonProperty("Process Brine/Saltwater")]
             public bool processSaltAndBrine { get; set; }
 
-#if SPACED_OUT
             [Option("Require Salt for construction")]
-#endif
             [JsonProperty]
             public bool requireSaltForConstruction { get; set; }
 
-#if SPACED_OUT
             [Option("Required Salt for construction")]
             [Limit(0, 10000)]
-#endif
             [JsonProperty]
             public float requiredSaltForConstruction { get; set; }
 

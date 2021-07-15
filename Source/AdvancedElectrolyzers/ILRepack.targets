@@ -9,8 +9,6 @@
 
 		<ItemGroup>
 			<LibraryPath Include="$(SolutionDir)\..\lib\"></LibraryPath>
-			<LibraryPath Include="$(SolutionDir)\..\lib\vanilla"></LibraryPath>
-			<LibraryPath Include="$(SolutionDir)\..\lib\spaced_out"></LibraryPath>
 		</ItemGroup>
 
 		<ILRepack

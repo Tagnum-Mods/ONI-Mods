@@ -7,13 +7,13 @@ using UnityEngine;
 
 namespace TagnumElite.AdvancedElectrolyzers
 {
-    public class IndustrialElectrolyzerMachine : StateMachineComponent<IndustrialElectrolyzerMachine.StatesInstance>
+    public class IndustrialElectrolyzer : StateMachineComponent<IndustrialElectrolyzer.StatesInstance>, ISecondaryOutput
     {
-        public class StatesInstance : GameStateMachine<States, StatesInstance, IndustrialElectrolyzerMachine, object>.GameInstance
+        public class StatesInstance : GameStateMachine<States, StatesInstance, IndustrialElectrolyzer, object>.GameInstance
         {
             private List<Guid> statusItemEntries = new List<Guid>();
 
-            public StatesInstance(IndustrialElectrolyzerMachine smi) : base(smi) { }
+            public StatesInstance(IndustrialElectrolyzer smi) : base(smi) { }
 
             public void AddStatusItems()
             {
@@ -32,7 +32,7 @@ namespace TagnumElite.AdvancedElectrolyzers
             }
         }
 
-        public class States : GameStateMachine<States, StatesInstance, IndustrialElectrolyzerMachine>
+        public class States : GameStateMachine<States, StatesInstance, IndustrialElectrolyzer>
         {
             public State disabled;
             public State waiting;
@@ -186,6 +186,15 @@ namespace TagnumElite.AdvancedElectrolyzers
         private int hydrogenOutputCell;
         private FlowUtilityNetwork.NetworkItem hydrogenOutputItem;
         private int oxygenOutputCell;
+        public bool HasSecondaryConduitType(ConduitType type)
+        {
+            return portInfo.conduitType == type;
+        }
+
+        public CellOffset GetSecondaryConduitOffset(ConduitType type)
+        {
+            return portInfo.offset;
+        }
 
         private float GetSpeedMultiplier()
         {
